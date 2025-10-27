@@ -1,0 +1,269 @@
+/* Import font 'bucin' */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* Pengaturan Dasar Halaman */
+body {
+    background-color: #2c3e50;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Sembunyikan scrollbar */
+}
+
+/* ================================== */
+/* === BAGIAN 1: ANIMASI HATI === */
+/* ================================== */
+
+/* Style untuk Hujan Hati (Otomatis) */
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    content: '❤️';
+    animation: floatUp linear forwards;
+}
+
+/* Animasi Hujan Hati 'floatUp' */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+/* Style untuk Jejak Hati (Mouse Interaktif) */
+.mouse-heart {
+    position: absolute;
+    font-size: 20px;
+    content: '💖';
+    pointer-events: none; /* Agar tidak bisa diklik */
+    animation: fadeAndFloat 1s ease-out forwards;
+    z-index: 5;
+}
+/* ... (kode untuk .heart dan .mouse-heart sudah ada di atasnya) ... */
+
+/* ▼▼▼ TAMBAHKAN KODE BARU INI ▼▼▼ */
+/* Style untuk Hujan Animasi Tambahan (Sparkle/Confetti) */
+.sparkle {
+    position: absolute;
+    bottom: -50px;
+    font-size: 15px; /* Ukuran default */
+    
+    /* Kita pakai animasi 'floatUp' yang sama dengan .heart */
+    animation: floatUp linear forwards; 
+    
+    /* Taruh di belakang mouse-heart (5) dan pesan (10) */
+    z-index: 1; 
+}
+/* ▲▲▲ BATAS AKHIR KODE BARU ▲▲▲ */
+
+/* Animasi Jejak Hati 'fadeAndFloat' */
+@keyframes fadeAndFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
+/* ================================== */
+/* === BAGIAN 2: KONTEN & TOMBOL === */
+/* ================================== */
+
+/* Kontainer Tombol Mulai */
+#start-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20; /* Paling depan */
+}
+
+/* Tombol Mulai */
+#startButton {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.7);
+    animation: pulse 2s infinite;
+}
+
+#startButton:hover {
+    background-color: #ff85c1;
+}
+
+/* Animasi Tombol Mulai 'pulse' */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Kontainer Pesan Pantun */
+.message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 10;
+    
+    /* Sembunyikan di awal */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+/* Kelas 'show' untuk memunculkan kontainer */
+.message-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Teks Pantun (Baris 1) */
+.message-container h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    color: #ff69b4;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* Teks Pantun (Baris 2 atau wadah GIF) */
+.message-container p {
+    font-size: 1.5em;
+    color: #ffb6c1;
+    min-height: 50px;
+}
+
+/* Style untuk GIF di dalam pantun */
+.pantun-gif {
+    max-width: 150px; /* Atur ukuran maksimum GIF */
+    height: auto;     /* Menjaga rasio aspek */
+    margin-top: 10px; /* Beri sedikit jarak */
+}
+
+/* Tombol 'Lanjut' */
+#nextButton {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffb6c1;
+    color: #2c3e50;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#nextButton:hover {
+    background-color: #ffffff;
+}
+
+/* ================================== */
+/* === BAGIAN 3: LAYAR FINAL === */
+/* ================================== */
+
+/* Layar Final (Hati Besar) */
+#final-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    
+    /* Sembunyikan di awal */
+    display: none; 
+    text-align: center;
+}
+
+/* Hati Besar */
+#big-heart {
+    font-size: 15em; /* Ukuran hati super besar */
+    color: #ff69b4;
+    text-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+    
+    /* Terapkan animasi 'beat' */
+    animation: beat 1.2s infinite ease-in-out;
+}
+
+/* Teks di bawah Hati Besar */
+#final-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    color: #ffb6c1;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* Animasi Hati Berdetak 'beat' */
+@keyframes beat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15); /* Membesar */
+    }
+}
+
+/* ================================== */
+/* === BAGIAN 4: CSS RESPONSIVE === */
+/* ================================== */
+
+/* Berlaku jika lebar layar 600px atau lebih kecil (HP) */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    #startButton {
+        font-size: 1.5em;
+        padding: 15px 30px;
+    }
+
+    .message-container {
+        width: 90vw; /* Lebar = 90% dari lebar layar */
+        padding: 20px;
+    }
+
+    .message-container h1 {
+        font-size: 2em;
+    }
+
+    .message-container p {
+        font-size: 1.3em;
+    }
+    
+    /* Style untuk GIF di HP (bisa disamakan atau dikecilkan) */
+    .pantun-gif {
+        max-width: 120px;
+    }
+
+    /* Kecilkan hati besar di layar final */
+    #big-heart {
+        font-size: 12em;
+    }
+
+    #final-text {
+        font-size: 2.2em;
+    }
+}
